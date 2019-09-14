@@ -10,6 +10,7 @@ var picThreeEl = document.getElementById('pic-three');
 var containerEl = document.getElementById('pictureContainer');
 var allProductArr = [];
 var recentIndex = [];
+var canvasEl = document.getElementById('myChart');
 
 function Product (filePath, productName){
     this.alt = productName;
@@ -89,23 +90,21 @@ new Product('img/water-can.jpg','Impossible watering can');
 new Product('img/wine-glass.jpg','Really annoying wine glass');
 
 function renderMostPopular(){
-
     //once votes run out, 
     var mostPopular;
     var clicks = 0;
 
+    // identifying the most popular item
     for(var i = 0; i < allProductArr.length; i++){
       if(allProductArr[i].votes > clicks){
         clicks = allProductArr[i].votes;
         mostPopular = allProductArr[i];
       }
     }
-
     var h2El = document.createElement('h2');
-    h2El.textContent = `The most popular product is ${mostPopular.productName} with ${mostPopular.votes} votes.`;
+    h2El.textContent = `The most popular product is ${mostPopular.title} with ${mostPopular.votes} votes.`;
     resultsEl.appendChild(h2El);
   }
-
 function handleClick(event){
     var clickedProduct = event.target.title;
     for(var i = 0; i < allProductArr.length; i++){
@@ -124,3 +123,55 @@ function handleClick(event){
 
 containerEl.addEventListener('click', handleClick);
 imageGenerator();
+
+
+
+// function generateChart(){
+//     var productNameArr = [];
+//     var votesArr = [];
+
+//     for(var i = 0; i < allProductArr.length; i++){
+//         productNameArr.push(allProductArr[i].name);
+//         votesArray.push(allProductArr[i].votes);
+//     }
+
+//     var ctx = canvasEl.getContext('2d');
+  
+//     new Chart(ctx, {
+//         type: 'bar',
+//         data: {
+//             labels: [productNameArr],
+//             datasets: [{
+//                 label: '# of Votes',
+//                 data: [votesArr],
+//                 backgroundColor: [
+//                     'rgba(255, 99, 132, 0.2)',
+//                     'rgba(54, 162, 235, 0.2)',
+//                     'rgba(255, 206, 86, 0.2)',
+//                     'rgba(75, 192, 192, 0.2)',
+//                     'rgba(153, 102, 255, 0.2)',
+//                     'rgba(255, 159, 64, 0.2)'
+//                 ],
+//                 borderColor: [
+//                     'rgba(255, 99, 132, 1)',
+//                     'rgba(54, 162, 235, 1)',
+//                     'rgba(255, 206, 86, 1)',
+//                     'rgba(75, 192, 192, 1)',
+//                     'rgba(153, 102, 255, 1)',
+//                     'rgba(255, 159, 64, 1)'
+//                 ],
+//                 borderWidth: 1
+//             }]
+//         },
+//         options: {
+//             scales: {
+//                 yAxes: [{
+//                     ticks: {
+//                         beginAtZero: true
+//                     }
+//                 }]
+//             }
+//         }
+//     });
+// }
+//     generateChart();

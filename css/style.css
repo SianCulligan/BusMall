@@ -62,3 +62,6 @@ footer {
     border: solid 1px black;
 }
 
+.chart{
+    border: 2px solid red;
+}
