@@ -39,7 +39,6 @@ function imageGenerator(){
     allProductArr[index].views++;
     recentIndex.push(index);
 
-
     var indexTwo = random(allProductArr.length);
 
     while(recentIndex.includes(indexTwo)) {
@@ -51,7 +50,6 @@ function imageGenerator(){
     allProductArr[indexTwo].views++;
     recentIndex.push(indexTwo);
 
-
     var indexThree = random(allProductArr.length);
 
     while(recentIndex.includes(indexThree)) {
@@ -62,9 +60,6 @@ function imageGenerator(){
     picThreeEl.title = allProductArr[indexThree].title;
     allProductArr[indexThree].views++;
     recentIndex.push(indexThree);
-
-   
-
 }
 
 // Generate a random number for index position in the image generating function
@@ -92,7 +87,6 @@ new Product('img/unicorn.jpg','Can of unicorn meat');
 new Product('img/usb.gif','Moving tentacle USB');
 new Product('img/water-can.jpg','Impossible watering can');
 new Product('img/wine-glass.jpg','Really annoying wine glass');
-
 
 function renderMostPopular(){
 
@@ -127,9 +121,6 @@ function handleClick(event){
         renderMostPopular();
     }
 }
-
-
-
 
 containerEl.addEventListener('click', handleClick);
 imageGenerator();

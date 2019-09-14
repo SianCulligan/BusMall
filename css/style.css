@@ -1,3 +1,5 @@
+/* to import a custom font, instead of linking in html - @import url('https://fonts.googleapis.com/css?family=Raleway:300&display=swap') */
+
 
 header {
     background-image: url(https://images.unsplash.com/photo-1542811228-efc689fbd82c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1353&q=80);
