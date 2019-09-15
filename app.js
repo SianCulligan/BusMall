@@ -90,23 +90,21 @@ new Product('img/water-can.jpg','Impossible watering can');
 new Product('img/wine-glass.jpg','Really annoying wine glass');
 
 function renderMostPopular(){
-
     //once votes run out, 
     var mostPopular;
     var clicks = 0;
 
+    // identifying the most popular item
     for(var i = 0; i < allProductArr.length; i++){
       if(allProductArr[i].votes > clicks){
         clicks = allProductArr[i].votes;
         mostPopular = allProductArr[i];
       }
     }
-
     var h2El = document.createElement('h2');
-    h2El.textContent = `The most popular product is ${mostPopular.productName} with ${mostPopular.votes} votes.`;
+    h2El.textContent = `The most popular product is ${mostPopular.title} with ${mostPopular.votes} votes.`;
     resultsEl.appendChild(h2El);
   }
-
 function handleClick(event){
     var clickedProduct = event.target.title;
     for(var i = 0; i < allProductArr.length; i++){
@@ -125,6 +123,7 @@ function handleClick(event){
 
 containerEl.addEventListener('click', handleClick);
 imageGenerator();
+
 
 function chartGenerator(){
 
