@@ -117,7 +117,7 @@ function handleClick(event){
 
     if(votesRemaining === 0){
         containerEl.removeEventListener('click', handleClick);
-        renderMostPopular();
+        chartGenerator();
     }
 }
 
@@ -125,53 +125,72 @@ containerEl.addEventListener('click', handleClick);
 imageGenerator();
 
 
+function chartGenerator(){
 
-// function generateChart(){
-//     var productNameArr = [];
-//     var votesArr = [];
+var productNameArr = [];
+console.log('should be product names',productNameArr);
+var votesArr = [];
+console.log('should be # of votes',votesArr);
+var colorSelector = [];
+var red = 0;
+var green = 0;
+var blue = 0;
 
-//     for(var i = 0; i < allProductArr.length; i++){
-//         productNameArr.push(allProductArr[i].name);
-//         votesArray.push(allProductArr[i].votes);
-//     }
+for(var i = 0; i < allProductArr.length; i++){
+    productNameArr.push(allProductArr[i].alt);
+    votesArr.push(allProductArr[i].votes);
+    colorSelector.push(`rgb(${red}, ${green}, ${blue})`)
+    red = red+i;
+    green = green+i;
+    blue = blue+i;
+}
 
-//     var ctx = canvasEl.getContext('2d');
-  
-//     new Chart(ctx, {
-//         type: 'bar',
-//         data: {
-//             labels: [productNameArr],
-//             datasets: [{
-//                 label: '# of Votes',
-//                 data: [votesArr],
-//                 backgroundColor: [
-//                     'rgba(255, 99, 132, 0.2)',
-//                     'rgba(54, 162, 235, 0.2)',
-//                     'rgba(255, 206, 86, 0.2)',
-//                     'rgba(75, 192, 192, 0.2)',
-//                     'rgba(153, 102, 255, 0.2)',
-//                     'rgba(255, 159, 64, 0.2)'
-//                 ],
-//                 borderColor: [
-//                     'rgba(255, 99, 132, 1)',
-//                     'rgba(54, 162, 235, 1)',
-//                     'rgba(255, 206, 86, 1)',
-//                     'rgba(75, 192, 192, 1)',
-//                     'rgba(153, 102, 255, 1)',
-//                     'rgba(255, 159, 64, 1)'
-//                 ],
-//                 borderWidth: 1
-//             }]
-//         },
-//         options: {
-//             scales: {
-//                 yAxes: [{
-//                     ticks: {
-//                         beginAtZero: true
-//                     }
-//                 }]
-//             }
-//         }
-//     });
-// }
-//     generateChart();
+var ctx = canvasEl.getContext('2d');
+
+new Chart(ctx, {
+    type: 'horizontalBar',
+    data: {
+        labels: productNameArr,
+        datasets: [{
+            label: '# of Votes',
+            data: votesArr,
+            backgroundColor: colorSelector,
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 2
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+}
