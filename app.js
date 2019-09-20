@@ -1,8 +1,9 @@
 'use strict';
 
+
+
 // global variables
 var votesRemaining = 25;
-var picturesEl = document.getElementById('pictures');
 var resultsEl = document.getElementById('results');
 var picOneEl = document.getElementById('pic-one');
 var picTwoEl = document.getElementById('pic-two');
@@ -11,6 +12,19 @@ var containerEl = document.getElementById('pictureContainer');
 var allProductArr = [];
 var recentIndex = [];
 var canvasEl = document.getElementById('myChart');
+
+if(localStorage.length > 0){
+    //  local storage get item
+    console.log('getting items from LS');
+        var localStorageProducts = localStorage.getItem('Products');
+        console.log('Local storage products', localStorageProducts);
+    // json Parse
+        var parsedProducts = JSON.parse(localStorageProducts);
+        allProductArr = parsedProducts;
+    } else {
+      newItems();
+      console.log('no items in storage, instanciating object ')
+    }
 
 function Product (filePath, productName){
     this.alt = productName;
@@ -23,11 +37,9 @@ function Product (filePath, productName){
 }
 // pulls random image from the constructor array
 function imageGenerator(){
-    
     while(recentIndex.length > 6){
         recentIndex.shift();
     }
-    console.log( 'recent index', recentIndex);
 
     var index = random(allProductArr.length);
 
@@ -61,6 +73,8 @@ function imageGenerator(){
     picThreeEl.title = allProductArr[indexThree].title;
     allProductArr[indexThree].views++;
     recentIndex.push(indexThree);
+
+
 }
 
 // Generate a random number for index position in the image generating function
@@ -68,26 +82,33 @@ function random(max){
     return Math.floor(Math.random() * Math.floor(max));
 }
 
-new Product('img/bag.jpg','R2D2 bag');
-new Product('img/banana.jpg','Banana slicer');
-new Product('img/bathroom.jpg','Bathroom iPad holder');
-new Product('img/boots.jpg','Open-toe rainboots');
-new Product('img/breakfast.jpg','Breakfast maker');
-new Product('img/bubblegum.jpg','Meatball bubblegum');
-new Product('img/chair.jpg','Chair');
-new Product('img/cthulhu.jpg','Cthulhu action figure');
-new Product('img/dog-duck.jpg','Duck bill for dogs');
-new Product('img/dragon.jpg','Can of Dragon meat');
-new Product('img/pen.jpg','Pen with utensil tops');
-new Product('img/pet-sweep.jpg','Pet booties');
-new Product('img/scissors.jpg','Pizza scissors');
-new Product('img/shark.jpg','Shark sleeping bag');
-new Product('img/sweep.png','Baby onesie with sweeper');
-new Product('img/tauntaun.jpg','Tauntaun sleeping bag');
-new Product('img/unicorn.jpg','Can of unicorn meat');
-new Product('img/usb.gif','Moving tentacle USB');
-new Product('img/water-can.jpg','Impossible watering can');
-new Product('img/wine-glass.jpg','Really annoying wine glass');
+function newItems(){
+    new Product('img/bag.jpg','R2D2 bag');
+    new Product('img/banana.jpg','Banana slicer');
+    new Product('img/bathroom.jpg','Bathroom iPad holder');
+    new Product('img/boots.jpg','Open-toe rainboots');
+    new Product('img/breakfast.jpg','Breakfast maker');
+    new Product('img/bubblegum.jpg','Meatball bubblegum');
+    new Product('img/chair.jpg','Chair');
+    new Product('img/cthulhu.jpg','Cthulhu action figure');
+    new Product('img/dog-duck.jpg','Duck bill for dogs');
+    new Product('img/dragon.jpg','Can of Dragon meat');
+    new Product('img/pen.jpg','Pen with utensil tops');
+    new Product('img/pet-sweep.jpg','Pet booties');
+    new Product('img/scissors.jpg','Pizza scissors');
+    new Product('img/shark.jpg','Shark sleeping bag');
+    new Product('img/sweep.png','Baby onesie with sweeper');
+    new Product('img/tauntaun.jpg','Tauntaun sleeping bag');
+    new Product('img/unicorn.jpg','Can of unicorn meat');
+    new Product('img/usb.gif','Moving tentacle USB');
+    new Product('img/water-can.jpg','Impossible watering can');
+    new Product('img/wine-glass.jpg','Really annoying wine glass');
+}
+
+
+
+
+
 
 function renderMostPopular(){
     //once votes run out, 
@@ -110,6 +131,8 @@ function handleClick(event){
     for(var i = 0; i < allProductArr.length; i++){
         if(clickedProduct === allProductArr[i].title){
             allProductArr[i].votes++;
+
+
         }
     }
     imageGenerator();
@@ -118,6 +141,12 @@ function handleClick(event){
     if(votesRemaining === 0){
         containerEl.removeEventListener('click', handleClick);
         chartGenerator();
+        // Stringify
+        var stringifyedProducts = JSON.stringify(allProductArr);
+  
+    //  local storage set item
+        localStorage.setItem('Products', stringifyedProducts);
+        console.log('setting items in LS');
     }
 }
 
@@ -128,9 +157,7 @@ imageGenerator();
 function chartGenerator(){
 
 var productNameArr = [];
-console.log('should be product names',productNameArr);
 var votesArr = [];
-console.log('should be # of votes',votesArr);
 var colorSelector = [];
 var red = 0;
 var green = 0;
@@ -194,3 +221,21 @@ new Chart(ctx, {
     }
 });
 }
+
+
+
+//////////LOCAL STORAGE NOTES: NUMBERED ITEMS ARE THE ORIGINAL STEPS
+// 1. USER COMES TO BUSMALL
+    //CREATING NEW OBJECT INSTANCES (MAKING AN ARRAY OF INSTANCES)
+//2. USER VOTES
+    //STORE USERS PROGRESS/EACH VOTE (THIS IS HARDER)
+//3. SEE THIER RESULTS
+    //NOTES: STORE VOTING RESULTS TO LOCAL STORAGE
+    //STORE THE ENTIRE 'ALLPRODUCTSARR' TO LOCAL STORAGE
+//4. USER LEAVES
+//5. NEW USER ARRIVES TO THE SAME COMPUTER
+    //GET 'ALLPRODUCTARR' FROM LOCAL STORAGE
+        //PARSE IT BACK, ASSIGN 'ALLPRODUCTARR' TO THE STUFF WE GOT OUT OF LOCAL STORAGE
+//6. NEW USER VOTES
+//7. SEES THEIR RESULTS
+//8. LEAVES.... AND SO ON

@@ -82,3 +82,7 @@ canvas:hover {
     margin-left: auto;
     margin-right: auto;
 } 
+
+.picture:hover {
+    border: black 10px solid;
+}
