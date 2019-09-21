@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 // global variables
 var votesRemaining = 25;
 var resultsEl = document.getElementById('results');
@@ -73,8 +71,6 @@ function imageGenerator(){
     picThreeEl.title = allProductArr[indexThree].title;
     allProductArr[indexThree].views++;
     recentIndex.push(indexThree);
-
-
 }
 
 // Generate a random number for index position in the image generating function
@@ -104,11 +100,6 @@ function newItems(){
     new Product('img/water-can.jpg','Impossible watering can');
     new Product('img/wine-glass.jpg','Really annoying wine glass');
 }
-
-
-
-
-
 
 function renderMostPopular(){
     //once votes run out, 
@@ -152,7 +143,6 @@ function handleClick(event){
 
 containerEl.addEventListener('click', handleClick);
 imageGenerator();
-
 
 function chartGenerator(){
 
@@ -221,8 +211,6 @@ new Chart(ctx, {
     }
 });
 }
-
-
 
 //////////LOCAL STORAGE NOTES: NUMBERED ITEMS ARE THE ORIGINAL STEPS
 // 1. USER COMES TO BUSMALL
