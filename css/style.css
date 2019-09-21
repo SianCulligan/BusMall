@@ -20,6 +20,7 @@ header {
     position: fixed;
     margin-top: 50px;
     margin-left: 2%;
+    z-index: 9999;
 }
 .companyName{
     padding-left: 15px;
@@ -82,7 +83,11 @@ canvas:hover {
     margin-left: auto;
     margin-right: auto;
 } 
-
-.picture:hover {
-    border: black 10px solid;
+img {
+    filter: grayscale(1.0);
+}
+img:hover {
+    cursor: pointer;
+    filter: none;
+    transition: .25s all ease-in-out;   
 }
